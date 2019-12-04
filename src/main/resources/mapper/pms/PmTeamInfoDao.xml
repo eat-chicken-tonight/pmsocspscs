@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pmsocspsc.modules.pms.dao.PmTeamInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pmsocspsc.modules.pms.entity.PmTeamInfoEntity" id="pmTeamInfoMap">
+        <result property="teamId" column="team_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="teamCode" column="team_code"/>
+        <result property="itemInfoId" column="item_info_id"/>
+        <result property="itemInfoCode" column="item_info_code"/>
+        <result property="matchTitle" column="match_title"/>
+        <result property="signUpTime" column="sign_up_time"/>
+        <result property="awardGrade" column="award_grade"/>
+        <result property="awardInfo" column="award_info"/>
+        <result property="teamInfoIsDel" column="team_info_is_del"/>
+        <collection property="pmTeamPersonInfoEntities" ofType="pmsocspsc.modules.pms.entity.PmTeamPersonInfoEntity">
+            <result property="personInfoId" column="person_info_id"/>
+            <result property="personTeamInfoId" column="person_team_info_id"/>
+            <result property="personCode" column="person_code"/>
+            <result property="personName" column="person_name"/>
+            <result property="personInstitute" column="person_institute"/>
+            <result property="personClass" column="person_class"/>
+            <result property="personGrade" column="person_grade"/>
+            <result property="personMajor" column="person_major"/>
+            <result property="personEmail" column="person_email"/>
+            <result property="personPhone" column="person_phone"/>
+            <result property="personInfoIsDel" column="person_info_is_del"/>
+        </collection>
+    </resultMap>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="pmTeamInfoMap">
+        select * from pm_team_info pti
+        left join pm_team_person_info ptpi
+        on pti.team_id = ptpi.person_team_info_id
+        where pti.team_id = #{teamId}
+    </select>
+    <select id="findByItemId" parameterType="java.lang.Integer" resultMap="pmTeamInfoMap">
+        select * from pm_team_info pti
+        left join pm_team_person_info ptpi
+        on pti.team_id = ptpi.person_team_info_id
+        where pti.item_info_id = #{itemInfoId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pmsocspsc.modules.pms.dao.PmItemInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pmsocspsc.modules.pms.entity.PmItemInfoEntity" id="pmItemInfoMap">
+        <result property="itemInfoId" column="item_info_id"/>
+        <result property="matchName" column="match_name"/>
+        <result property="matchUnit" column="match_unit"/>
+        <result property="matchType" column="match_type"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="matchStartTime" column="match_start_time"/>
+        <result property="matchEndTime" column="match_end_time"/>
+        <result property="matchMajor" column="match_major"/>
+        <result property="hostUnit" column="host_unit"/>
+        <result property="undertakeUnit" column="undertake_unit"/>
+        <result property="itemInfoTime" column="item_info_time"/>
+        <result property="matchSign" column="match_sign"/>
+        <result property="itemInfoStatus" column="item_info_status"/>
+        <result property="itemInfoFinish" column="item_info_finish"/>
+        <result property="itemInfoIsDel" column="item_info_is_del"/>
+        <association property="pmFundInfoEntity" javaType="pmsocspsc.modules.pms.entity.PmFundInfoEntity">
+            <result property="budgetId" column="budget_id"/>
+            <result property="registerCost" column="register_cost"/>
+            <result property="itemInfoId" column="item_info_id"/>
+            <result property="travelCost" column="travel_cost"/>
+            <result property="trainCost" column="train_cost"/>
+            <result property="reviewCost" column="review_cost"/>
+            <result property="guideCost" column="guide_cost"/>
+            <result property="leaderCost" column="leader_cost"/>
+            <result property="organizeCost" column="organize_cost"/>
+            <result property="consumablesCost" column="consumables_cost"/>
+            <result property="awardCost" column="award_cost"/>
+            <result property="anotherCost" column="another_cost"/>
+            <result property="totalCost" column="total_cost"/>
+            <result property="budgetInfoIsDel" column="budget_info_is_del"/>
+        </association>
+        <association property="pmItemAttachEntity" javaType="pmsocspsc.modules.pms.entity.PmItemAttachEntity">
+            <result property="attachId" column="attach_id"/>
+            <result property="itemInfoId" column="item_info_id"/>
+            <result property="attachName" column="attach_name"/>
+            <result property="attachPath" column="attach_path"/>
+            <result property="attachIsDel" column="attach_is_del"/>
+        </association>
+    </resultMap>
+
+    <select id="findById" resultMap="pmItemInfoMap">
+        select * from pm_item_info pmii
+        inner join pm_item_attach pia on pmii.item_info_id = pia.item_info_id
+        inner join pm_fund_info pfi on pmii.item_info_id = pfi.item_info_id
+        and pmii.item_info_id = #{itemInfoId}
+    </select>
+
+
+</mapper>

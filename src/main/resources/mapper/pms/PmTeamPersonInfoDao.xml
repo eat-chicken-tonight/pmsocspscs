@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pmsocspsc.modules.pms.dao.PmTeamPersonInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pmsocspsc.modules.pms.entity.PmTeamPersonInfoEntity" id="pmTeamPersonInfoMap">
+        <result property="personInfoId" column="person_info_id"/>
+        <result property="personTeamInfoId" column="person_team_info_id"/>
+        <result property="personCode" column="person_code"/>
+        <result property="personName" column="person_name"/>
+        <result property="personInstitute" column="person_institute"/>
+        <result property="personClass" column="person_class"/>
+        <result property="personGrade" column="person_grade"/>
+        <result property="personMajor" column="person_major"/>
+        <result property="personEmail" column="person_email"/>
+        <result property="personPhone" column="person_phone"/>
+        <result property="personInfoIsDel" column="person_info_is_del"/>
+    </resultMap>
+
+
+</mapper>

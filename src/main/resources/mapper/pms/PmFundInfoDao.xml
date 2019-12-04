@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pmsocspsc.modules.pms.dao.PmFundInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pmsocspsc.modules.pms.entity.PmFundInfoEntity" id="pmFundInfoMap">
+        <result property="budgetId" column="budget_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="registerCost" column="register_cost"/>
+        <result property="itemInfoId" column="item_info_id"/>
+        <result property="finishInfoId" column="finish_info_id"/>
+        <result property="finishInfoStatus" column="finish_info_status"/>
+        <result property="travelCost" column="travel_cost"/>
+        <result property="trainCost" column="train_cost"/>
+        <result property="reviewCost" column="review_cost"/>
+        <result property="guideCost" column="guide_cost"/>
+        <result property="leaderCost" column="leader_cost"/>
+        <result property="organizeCost" column="organize_cost"/>
+        <result property="consumablesCost" column="consumables_cost"/>
+        <result property="awardCost" column="award_cost"/>
+        <result property="anotherCost" column="another_cost"/>
+        <result property="totalCost" column="total_cost"/>
+        <result property="budgetInfoIsDel" column="budget_info_is_del"/>
+    </resultMap>
+
+
+</mapper>
