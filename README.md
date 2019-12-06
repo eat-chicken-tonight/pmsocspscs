@@ -14,8 +14,8 @@
 **部署项目**  
 
 ```text
-1.下拉镜像： docker pull mikeyboom/pmsoscpsc
-2.运行容器： docker run --name pmsocspsc-vue-[datatime] -p 8001:8002 <imageId>
+1.下拉镜像： docker pull mikeyboom/pmsoscpscs
+2.运行容器： docker run --name pmsocspscs-vue-[datatime] -p 8001:8002 <imageId>
 ```
 
 <br> 
