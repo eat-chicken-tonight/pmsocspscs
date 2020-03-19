@@ -20,4 +20,4 @@ log_bin = /var/log/mysql/mysql-bin.log
 relay-log = /var/log/mysql/mysql-relay-bin.log
 
 # 要同步的库
-binlog_do_db = pmsocspscs
+binlog_do_db = mydb

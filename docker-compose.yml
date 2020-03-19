@@ -89,16 +89,16 @@ services:
       - ./cluster/master/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
       - ./cluster/master/data:/var/lib/mysql
       - ./cluster/databases/:/tmp/sql/
-    command:
-      mysql -h localhost -P3306 -uroot -p123456 pmsocspsc < /tmp/sql/pmsocspsc.sql
+#    command:
+#      mysql -h localhost -P3306 -uroot -p123456 pmsocspsc < /tmp/sql/pmsocspsc.sql
     networks:
       - monitor
 
-  mysql_slave1:
+  mysql_slave_1:
     image: mysql:5.7
     env_file:
       - cluster/slave1/mysql_slave.env
-    container_name: "mysql_slave-1"
+    container_name: "mysql_slave_1"
     restart: "no"
     ports:
       - 5506:3306
@@ -110,11 +110,11 @@ services:
     networks:
       - monitor
 
-  mysql_slave2:
+  mysql_slave_2:
     image: mysql:5.7
     env_file:
       - ./cluster/slave2/mysql_slave.env
-    container_name: "mysql_slave-2"
+    container_name: "mysql_slave_2"
     restart: "no"
     ports:
       - 5507:3306

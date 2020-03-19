@@ -2,15 +2,17 @@
 #################### 变量定义 ####################
 mysql_user="mydb_slave_user"    # 主服务器允许从服务器登录的用户名
 mysql_password="mydb_slave_pwd" # 主服务器允许从服务器登录的密码
-root_password="123456"             # 每台服务器的root密码
+root_password="111"             # 每台服务器的root密码
 # 主库列表
 master_container=mysql_master
 # 从库列表
-slave_containers=(mysql_slave_1 mysql_slave_2)
+slave_containers=(mysql_slave1 mysql_slave2)
 # 所有的数据库集群列表
 all_containers=("$master_container" "${slave_containers[@]}")
+
 # 链接重试间隔时间 s
 retry_duration=5
+
 #################### 函数定义 ####################
 # 获取服务器的ip
 docker-ip() {
@@ -19,7 +21,7 @@ docker-ip() {
 
 #################### docker-compose初始化 ####################
 docker-compose down
-rm -rf ./cluster/master/data/* ./cluster/slave1/data/* ./cluster/slave2/data/*
+rm -rf ./master/data/* ./slave1/data/* ./slave2/data/*
 docker-compose build
 docker-compose up -d
 
