@@ -1,8 +1,8 @@
 #!/bin/bash
 #################### 变量定义 ####################
-mysql_user="mydb_slave_user"    # 主服务器允许从服务器登录的用户名
-mysql_password="mydb_slave_pwd" # 主服务器允许从服务器登录的密码
-root_password="111"             # 每台服务器的root密码
+mysql_user="pmsocspsc_slave_user"    # 主服务器允许从服务器登录的用户名
+mysql_password="pmsocspsc_slave_pwd" # 主服务器允许从服务器登录的密码
+root_password="123456"             # 每台服务器的root密码
 # 主库列表
 master_container=mysql_master
 # 从库列表
