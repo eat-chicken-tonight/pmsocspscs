@@ -18,6 +18,10 @@
 2.运行容器： docker run --name pmsocspscs-vue-[datatime] -p 8001:8002 <imageId>
 ```
 
+
+
+<details>
+  <summary>业务需求</summary>
 <br> 
    <ul>
       <li>
@@ -112,7 +116,7 @@
         教务处实验实践科工作人员可以统计竞赛立项情况、获奖情况。
       </li>
     </ul>
-    
+</details>    
 
 # 技术要求
 
@@ -131,3 +135,16 @@
 6应用微信小程序(结合Springboot/RestFul进行后台服务调用)  
 
 
+## 技术架构
+
+### 后台
+
+> springboot +  mybaits plus + druid + redis + mysql cluster + docker/docker-compose + shiro + swagger
+
+### 监控
+
+> Prometheus + grafana + cadvisor + node-exporter
+
+### 前端
+
+> vue 全家桶 + ElementUI + axios

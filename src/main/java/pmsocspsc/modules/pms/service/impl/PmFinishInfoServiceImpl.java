@@ -1,6 +1,7 @@
 package pmsocspsc.modules.pms.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -32,6 +33,8 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
     private PmTeamInfoService pmTeamInfoService;
     @Autowired
     private PmFinishAttachService pmFinishAttachService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * 分页查询
      * @param params
@@ -98,6 +101,7 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
         //队伍
         entity.setPmTeamInfoEntities(pmTeamInfoService.findByItemId(entity.getItemInfoId()));
         //附件
+        //TODO：优先查找redis数据库
         entity.setPmFinishAttachEntity(pmFinishAttachService.findByFinishId(entity.getFinishInfoId()));
 
         return entity;
@@ -116,10 +120,10 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
         PmFinishAttachEntity attachEntity = entity.getPmFinishAttachEntity();
         attachEntity.setFinishInfoId(entity.getFinishInfoId());
         pmFinishAttachService.save(attachEntity);
+        //TODO:保存到redis
+        redisTemplate.opsForValue().set(attachEntity.getAttachId(),attachEntity);
         //获奖
-        entity.getPmTeamInfoEntities().forEach(v->{
-            pmTeamInfoService.updateBySimple(v);
-        });
+        entity.getPmTeamInfoEntities().forEach(v->{pmTeamInfoService.updateBySimple(v);});
         //支出
         PmFundInfoEntity pfie = entity.getPmFundInfoEntity();
         pfie.setTotalCost(pfie.getRegisterCost()+pfie.getTravelCost()+pfie.getTrainCost()+pfie.getReviewCost()+pfie.getGuideCost()+pfie.getLeaderCost()+pfie.getOrganizeCost()+pfie.getConsumablesCost()+pfie.getAwardCost()+pfie.getAnotherCost());

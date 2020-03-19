@@ -2,8 +2,8 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         druid:
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://localhost:3306/pmsocspsc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+            driver-class-name: com.mysql.jdbc.Driver
+            url: jdbc:mysql://47.106.210.183:3306/pmsocspsc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
             username: root
             password: 123456
             initial-size: 10
@@ -22,6 +22,7 @@ spring:
                 url-pattern: /druid/*
                 login-username: admin
                 login-password: admin
+                allow: 127.0.0.1
             filter:
                 stat:
                     log-slow-sql: true
@@ -30,19 +31,6 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
-##多数据源的配置
-dynamic:
-    datasource:
-        slave1:
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://47.106.210.183:3307/pmsocspsc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-            username: root
-            password: 123456
-        slave2:
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://47.106.210.183:3308/pmsocspsc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-            username: root
-            password: 123456
 logging:
     level:
         pmsocspsc.modules.pms.dao : debug

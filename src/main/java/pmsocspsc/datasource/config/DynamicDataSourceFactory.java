@@ -13,12 +13,7 @@ import pmsocspsc.datasource.properties.DataSourceProperties;
 
 import java.sql.SQLException;
 
-/**
- * DruidDataSource
- *
- * @author Mark sunlightcs@gmail.com
- * @since 1.0.0
- */
+
 public class DynamicDataSourceFactory {
 
     public static DruidDataSource buildDruidDataSource(DataSourceProperties properties) {
