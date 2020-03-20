@@ -22,7 +22,6 @@ spring:
         url-pattern: /druid/*
         login-username: admin
         login-password: admin
-        allow: 127.0.0.1
       filter:
         stat:
           log-slow-sql: true
