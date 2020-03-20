@@ -1,5 +1,6 @@
 package pmsocspsc.modules.pms.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -8,12 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import pmsocspsc.common.utils.PageUtils;
 import pmsocspsc.common.utils.Query;
 
+import pmsocspsc.common.utils.RedisUtils;
 import pmsocspsc.modules.pms.dao.PmFinishInfoDao;
 import pmsocspsc.modules.pms.entity.PmFinishAttachEntity;
 import pmsocspsc.modules.pms.entity.PmFinishInfoEntity;
@@ -34,7 +38,7 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
     @Autowired
     private PmFinishAttachService pmFinishAttachService;
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisUtils redisUtils;
     /**
      * 分页查询
      * @param params
@@ -101,8 +105,14 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
         //队伍
         entity.setPmTeamInfoEntities(pmTeamInfoService.findByItemId(entity.getItemInfoId()));
         //附件
-        //TODO：优先查找redis数据库
-        entity.setPmFinishAttachEntity(pmFinishAttachService.findByFinishId(entity.getFinishInfoId()));
+        //优先查找redis数据库
+        PmFinishAttachEntity redisAtta = redisUtils.get(entity.getFinishInfoId().toString(), PmFinishAttachEntity.class);
+        //
+        if (redisAtta == null) {
+            redisAtta = (pmFinishAttachService.findByFinishId(entity.getFinishInfoId()));
+            redisUtils.set(redisAtta.getFinishInfoId().toString(),redisAtta);
+        }
+        entity.setPmFinishAttachEntity(redisAtta);
 
         return entity;
     }
@@ -120,8 +130,8 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
         PmFinishAttachEntity attachEntity = entity.getPmFinishAttachEntity();
         attachEntity.setFinishInfoId(entity.getFinishInfoId());
         pmFinishAttachService.save(attachEntity);
-        //TODO:保存到redis
-        redisTemplate.opsForValue().set(attachEntity.getAttachId(),attachEntity);
+        //保存到redis
+        redisUtils.set(attachEntity.getFinishInfoId().toString(),attachEntity);
         //获奖
         entity.getPmTeamInfoEntities().forEach(v->{pmTeamInfoService.updateBySimple(v);});
         //支出
@@ -129,7 +139,6 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
         pfie.setTotalCost(pfie.getRegisterCost()+pfie.getTravelCost()+pfie.getTrainCost()+pfie.getReviewCost()+pfie.getGuideCost()+pfie.getLeaderCost()+pfie.getOrganizeCost()+pfie.getConsumablesCost()+pfie.getAwardCost()+pfie.getAnotherCost());
         pfie.setFinishInfoId(entity.getFinishInfoId());
         pmFundInfoService.save(pfie);
-
         //更新立项项目状态
         PmItemInfoEntity pmItemInfoEntity = pmItemInfoService.getById(entity.getItemInfoId());
         pmItemInfoEntity.setItemInfoFinish(1);
@@ -162,6 +171,10 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
         PmFinishAttachEntity newAttachEntity = entity.getPmFinishAttachEntity();
         newAttachEntity.setFinishInfoId(entity.getFinishInfoId());
         pmFinishAttachService.save(newAttachEntity);
+        //清除缓存
+        redisUtils.delete(entity.getFinishInfoId().toString());
+        //更新缓存
+        redisUtils.set(newAttachEntity.getFinishInfoId().toString(),newAttachEntity);
         return res;
     }
 
@@ -184,6 +197,8 @@ public class PmFinishInfoServiceImpl extends ServiceImpl<PmFinishInfoDao, PmFini
             });
             //移除附件
             pmFinishAttachService.removeById(entity.getPmFinishAttachEntity().getAttachId());
+            //清除缓存
+            redisUtils.delete(entity.getFinishInfoId().toString());
             //解除结题状态：
             PmItemInfoEntity itemInfoEntity = pmItemInfoService.getById(getById(v).getItemInfoId());
             itemInfoEntity.setItemInfoFinish(0);

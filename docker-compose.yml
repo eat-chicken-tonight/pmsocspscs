@@ -42,6 +42,8 @@ services:
     container_name: grafana
     hostname: grafana
     restart: always
+    volumes:
+      -./monitoring/defaults.ini:/usr/share/grafana/conf/defaults.ini
     ports:
       - "3000:3000"
     networks:

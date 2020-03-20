@@ -14,11 +14,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-/**
- * Shiro工具类
- *
- * @author Mark sunlightcs@gmail.com
- */
+
 public class ShiroUtils {
 
 	public static Session getSession() {
