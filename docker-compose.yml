@@ -89,8 +89,6 @@ services:
       - ./cluster/master/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
       - ./cluster/master/data:/var/lib/mysql
       - ./cluster/databases/:/tmp/sql/
-#    command:
-#      mysql -h localhost -P3306 -uroot -p123456 pmsocspsc < /tmp/sql/pmsocspsc.sql
     networks:
       - monitor
 
