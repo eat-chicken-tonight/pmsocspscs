@@ -1,25 +1,26 @@
 package pmsocspsc.modules.pms.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 import pmsocspsc.common.utils.ConfigConstant;
 import pmsocspsc.common.utils.FileUtils;
-import pmsocspsc.modules.pms.entity.PmFinishAttachEntity;
-import pmsocspsc.modules.pms.service.PmFinishAttachService;
 import pmsocspsc.common.utils.PageUtils;
 import pmsocspsc.common.utils.R;
+import pmsocspsc.modules.pms.entity.PmFinishAttachEntity;
+import pmsocspsc.modules.pms.service.PmFinishAttachService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * @email biaogejiushibiao@gmail.com
  * @date 2019-11-27 17:34:06
  */
+@Api(value = "结题附件",tags = {"结题附件接口"},description = "结题附件")
 @RestController
 @RequestMapping("pms/pmfinishattach")
 public class PmFinishAttachController {
@@ -38,6 +40,8 @@ public class PmFinishAttachController {
     /**
      * 列表
      */
+    @ApiOperation(value = "查询",notes = "查询集体附件列表")
+    @ApiImplicitParam(name = "附件参数",value = "附件Id",dataType = "Long",required = true)
     @RequestMapping("/list")
     @RequiresPermissions("pms:pmfinishattach:list")
     public R list(@RequestParam Map<String, Object> params){

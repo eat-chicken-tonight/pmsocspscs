@@ -1,22 +1,25 @@
 package pmsocspsc.modules.pms.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
-import pmsocspsc.common.utils.*;
+import pmsocspsc.common.utils.ConfigConstant;
+import pmsocspsc.common.utils.FileUtils;
+import pmsocspsc.common.utils.PageUtils;
+import pmsocspsc.common.utils.R;
 import pmsocspsc.modules.pms.entity.PmItemAttachEntity;
 import pmsocspsc.modules.pms.service.PmItemAttachService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -26,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  * @email biaogejiushibiao@gmail.com
  * @date 2019-11-27 17:34:06
  */
+@Api(value = "项目附件",tags = {"项目附件接口"},description = "项目附件")
 @RestController
 @RequestMapping("/pms/pmitemattach")
 public class PmItemAttachController {
@@ -36,6 +40,7 @@ public class PmItemAttachController {
     /**
      * 列表
      */
+    @ApiOperation("查询列表")
     @RequestMapping("/list")
     @RequiresPermissions("pms:pmitemattach:list")
     public R list(@RequestParam Map<String, Object> params){

@@ -1,21 +1,17 @@
 package pmsocspsc.modules.pms.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import pmsocspsc.modules.pms.entity.PmFinishInfoRetreatEntity;
-import pmsocspsc.modules.pms.service.PmFinishInfoRetreatService;
+import org.springframework.web.bind.annotation.*;
 import pmsocspsc.common.utils.PageUtils;
 import pmsocspsc.common.utils.R;
+import pmsocspsc.modules.pms.entity.PmFinishInfoRetreatEntity;
+import pmsocspsc.modules.pms.service.PmFinishInfoRetreatService;
 
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -25,6 +21,7 @@ import pmsocspsc.common.utils.R;
  * @email biaogejiushibiao@gmail.com
  * @date 2019-12-03 16:46:48
  */
+@Api(value = "结题回退",tags = {"结题回退接口"},description = "结题回退")
 @RestController
 @RequestMapping("pms/pmfinishinforetreat")
 public class PmFinishInfoRetreatController {
@@ -34,6 +31,7 @@ public class PmFinishInfoRetreatController {
     /**
      * 列表
      */
+    @ApiOperation(value = "查询",notes = "查询列表")
     @RequestMapping("/list")
     @RequiresPermissions("pms:pmfinishinforetreat:list")
     public R list(@RequestParam Map<String, Object> params){

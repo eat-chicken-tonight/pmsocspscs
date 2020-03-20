@@ -1,21 +1,17 @@
 package pmsocspsc.modules.pms.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import pmsocspsc.modules.pms.entity.PmItemInfoEntity;
-import pmsocspsc.modules.pms.service.PmItemInfoService;
+import org.springframework.web.bind.annotation.*;
 import pmsocspsc.common.utils.PageUtils;
 import pmsocspsc.common.utils.R;
+import pmsocspsc.modules.pms.entity.PmItemInfoEntity;
+import pmsocspsc.modules.pms.service.PmItemInfoService;
 
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -25,6 +21,7 @@ import pmsocspsc.common.utils.R;
  * @email biaogejiushibiao@gmail.com
  * @date 2019-11-27 17:34:06
  */
+@Api(value = "项目信息",tags = {"项目信息接口"},description = "项目信息")
 @RestController
 @RequestMapping("pms/pmiteminfo")
 public class PmItemInfoController {
@@ -34,6 +31,7 @@ public class PmItemInfoController {
     /**
      * 列表
      */
+    @ApiOperation(value = "查询",notes = "查询列表")
     @RequestMapping("/list")
     @RequiresPermissions("pms:pmiteminfo:list")
     public R list(@RequestParam Map<String, Object> params){
