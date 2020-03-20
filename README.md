@@ -5,9 +5,9 @@
 >大学生专业学科竞赛项目过程管理系统
 
 
-
+## 业务功能
 <details>
-  <summary><h2>业务功能</h2></summary>
+  <summary>点击展开</summary>
 <br> 
    <ul>
       <li>
