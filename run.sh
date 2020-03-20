@@ -67,9 +67,9 @@ for slave in "${slave_containers[@]}";do
   # 查看从服务器得状态
   docker exec $slave sh -c "export MYSQL_PWD='$root_password'; mysql -u root -e 'SHOW SLAVE STATUS \G'"
 done
-echo "init databases pmsocspscs"
-docker exec $master_container sh -c mysql -h localhost -P3306 -uroot -p123456 pmsocspsc < /tmp/sql/pmsocspsc.sql
+echo "\033[42;34m Init databases pmsocspscs \033[0m"
+res = `docker exec $master_container sh -c 'export MYSQL_PWD='$root_password'; mysql -h localhost -P3306 -uroot pmsocspsc < /tmp/sql/pmsocspsc.sql"'`
 if [ 0 -eq $? ];then
-    echo "init databases executed successfully"
+    echo "\033[42;34m init databases executed successfully  \033[0m"
 fi
 echo -e "\033[42;34m finish success !!! \033[0m"
