@@ -1,26 +1,13 @@
 大学生专业学科竞赛项目过程管理系统  
  ============================  
-**项目说明**  
+## **项目说明**  
 
-``大学生专业学科竞赛项目过程管理系统 ``  
-
-**构建项目**
-
-1.运行命令:`mvn clean package`  
-2.构建镜像:`docker build -t mikeyboom/pmsocspscs .`  
-3.推送仓库:`docker push mikeyboom/pmsocspscs`  
-
-**部署项目**  
-
-1.下拉项目:`git clone https://github.com/mikeygithub/pmsocspscs.git`  
-2.打开项目:`cd pmsocspscs`  
-3.授权脚本:`chomd +x run.sh`  
-4.起飞项目:`./run.sh`   
+>大学生专业学科竞赛项目过程管理系统
 
 
 
 <details>
-  <summary>业务需求</summary>
+  <summary><h2>业务功能</h2></summary>
 <br> 
    <ul>
       <li>
@@ -115,7 +102,22 @@
         教务处实验实践科工作人员可以统计竞赛立项情况、获奖情况。
       </li>
     </ul>
-</details>    
+</details>
+
+
+## **构建项目**
+
+1.运行命令:`mvn clean package`  
+2.构建镜像:`docker build -t mikeyboom/pmsocspscs .`  
+3.推送仓库:`docker push mikeyboom/pmsocspscs`  
+
+## **部署项目**  
+
+1.下拉项目:`git clone https://github.com/mikeygithub/pmsocspscs.git`  
+2.打开项目:`cd pmsocspscs`  
+3.授权脚本:`chomd +x run.sh`  
+4.起飞项目:`./run.sh`   
+
 
 ## 技术要求
 
@@ -127,7 +129,7 @@
 ### 可选技术(加分项，每项10分，封顶30分)
 
 >1数据库采用集群技术 [已采用]   
-2使用NaSQL技术 (非关系数据库，比如高速缓存，附件的管理) [已采用] 
+2使用NaSQL技术 (非关系数据库，比如高速缓存，附件的管理) [已采用]   
 3使用RestFul服务 (分布式改造)[已采用]  
 4使用消息服务(构建第三方服务，并用消息中间件调用)  
 5应用健康监控(各层的性能监控) [已采用] 
