@@ -37,7 +37,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
             //加了ApiOperation注解的类，才生成接口文档
             .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
             //包下的类，才生成接口文档
-            //.apis(RequestHandlerSelectors.basePackage("io.renren.controller"))
+            .apis(RequestHandlerSelectors.basePackage("pmsocspsc.modules.pms.controller"))
             .paths(PathSelectors.any())
             .build()
             .securitySchemes(security());
@@ -46,7 +46,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("大学生专业学科竞赛项目过程管理系统")
-            .description("大学生专业学科竞赛项目过程管理系统t文档")
+            .description("大学生专业学科竞赛项目过程管理系统文档")
             .termsOfServiceUrl("")
             .version("3.0.0")
             .build();
