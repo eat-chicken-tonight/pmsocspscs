@@ -1,5 +1,5 @@
 FROM java:8
-EXPOSE 8080
+EXPOSE 8081
 
 VOLUME /tmp
 ADD target/pmsocspscs.jar  /app.jar
