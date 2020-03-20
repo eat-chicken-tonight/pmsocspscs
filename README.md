@@ -8,7 +8,7 @@
 
 1.运行命令:`mvn clean package`  
 2.构建镜像:`docker build -t mikeyboom/pmsocspscs .`  
-3.推送仓库:`docker push mikeyboom/pmsocspsc`  
+3.推送仓库:`docker push mikeyboom/pmsocspscs`  
 
 **部署项目**  
 
