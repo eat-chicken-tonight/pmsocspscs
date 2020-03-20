@@ -6,17 +6,16 @@
 
 **构建项目**
 
-````text
-1.运行命令 mvn clean package docker:build 打包并生成docker镜像
-2.推送到仓库： docker push mikeyboom/pmsoscpsc
-````
+1.运行命令:`mvn clean package`  
+2.构建镜像:`docker build -t mikeyboom/pmsocspscs .`  
+3.推送仓库:`docker push mikeyboom/pmsocspsc`  
 
 **部署项目**  
 
-```text
-1.下拉镜像： docker pull mikeyboom/pmsoscpscs
-2.运行容器： docker run --name pmsocspscs-vue-[datatime] -p 8001:8002 <imageId>
-```
+1.下拉项目:`git clone https://github.com/mikeygithub/pmsocspscs.git`  
+2.打开项目:`cd pmsocspscs`  
+3.授权脚本:`chomd +x run.sh`  
+4.起飞项目:`./run.sh`   
 
 
 
@@ -118,14 +117,14 @@
     </ul>
 </details>    
 
-# 技术要求
+## 技术要求
 
-## 必选技术: (封顶70分)
+### 必选技术: (封顶70分)
 
 >1开发技 术必须采用SpringBoot  
 2前端技 术采用Vue
 
-## 可选技术(加分项，每项10分，封顶30分)
+### 可选技术(加分项，每项10分，封顶30分)
 
 >1数据库采用集群技术 [已采用]   
 2使用NaSQL技术 (非关系数据库，比如高速缓存，附件的管理) [已采用] 
@@ -135,16 +134,16 @@
 6应用微信小程序(结合Springboot/RestFul进行后台服务调用)  
 
 
-## 技术架构
+### 技术架构
 
-### 后台
+#### 后台
 
 > springboot +  mybaits plus + druid + redis + mysql cluster + docker/docker-compose + shiro + swagger
 
-### 监控
+#### 监控
 
 > Prometheus + grafana + cadvisor + node-exporter
 
-### 前端
+#### 前端
 
 > vue 全家桶 + ElementUI + axios

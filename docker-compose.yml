@@ -13,6 +13,13 @@ services:
     networks:
       - monitor
 ################################################################################################
+  pmsoscpsc:
+    image: mikeyboom/pmsocspsc
+    ports:
+      - 8002:8002
+    networks:
+      - monitor
+################################################################################################
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -38,12 +45,12 @@ services:
     networks:
       - monitor
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:6.6.2
     container_name: grafana
     hostname: grafana
     restart: always
     volumes:
-      -./monitoring/defaults.ini:/usr/share/grafana/conf/defaults.ini
+      - ./monitoring/defaults.ini:/usr/share/grafana/conf/defaults.ini
     ports:
       - "3000:3000"
     networks:
