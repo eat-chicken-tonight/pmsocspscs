@@ -13,7 +13,7 @@ services:
     networks:
       - monitor
 ################################################################################################
-  pmsoscpsc:
+  pmsocspsc:
     image: mikeyboom/pmsocspsc
     ports:
       - 8002:8002
